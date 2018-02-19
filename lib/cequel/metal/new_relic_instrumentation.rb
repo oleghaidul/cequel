@@ -13,7 +13,7 @@ module Cequel
     module NewRelicInstrumentation
       extend ActiveSupport::Concern
 
-      define_method :execute_with_options_with_newrelic do |statement, options|
+      define_method :execute_with_options do |statement, options|
 
         operation = nil
         statement_txt = nil
@@ -53,7 +53,7 @@ module Cequel
 
 
       included do
-        alias_method_chain :execute_with_options, :newrelic
+        alias_method :original_execute_with_options, :execute_with_options
       end
     end
   end
